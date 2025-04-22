@@ -1,0 +1,8 @@
+<div>
+    <p>{{texto}}</p>
+    @for (raza of this.breedArray; track $index) {
+        <p>{{raza.name}}</p>
+        <p>{{raza.description}}</p>
+        <img src="{{raza.image.url}}" alt="">
+    }
+</div>

@@ -1,8 +1,31 @@
 <div>
-    <p>{{texto}}</p>
-    @for (raza of this.breedArray; track $index) {
-        <p>{{raza.name}}</p>
-        <p>{{raza.description}}</p>
-        <img src="{{raza.image.url}}" alt="">
-    }
+    <p>Bienvenido mira unos gateetos</p>
+    <div style="position: relative;display: flex;justify-content: center;align-items: center;">
+        <button (click)="moverIzquierda()">left</button>
+        @if(this.imagenInicial == -1) {
+            <div style="position:relative;height: 220px;width: 380px;background-color: gray;">
+                <div style="height:inherit;width: inherit; background-image: url({{this.breedArray[this.breedArray.length-1].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
+            </div>
+        }@else{
+            <div style="position:relative;height: 220px;width: 380px;background-color: gray;">
+                <div style="height:inherit;width: inherit; background-image: url({{this.breedArray[this.imagenInicial].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
+            </div>
+        }
+        <div style="position: relative;height: 220px;width: 380px;background-color: bisque;">
+            <div style="height:inherit;width: inherit;background-image: url({{this.breedArray[this.imagenInicial+1].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"
+                alt=""></div>
+        </div>
+        @if(this.imagenInicial == this.breedArray.length-2) {
+            <div style="position: relative;height: 220px;width: 380px;background-color: aquamarine ;">
+                <div style="height:inherit;width: inherit;background-image: url({{this.breedArray[0].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
+            </div>
+        }@else{
+            <div style="position: relative;height: 220px;width: 380px;background-color: aquamarine ;">
+                <div style="height:inherit;width: inherit;background-image: url({{this.breedArray[this.imagenInicial+2].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
+            </div>
+        }
+        <button (click)="moverDerecha()">right</button>
+    </div>
+    <p>{{this.nombreRaza}}</p>
+    <p>{{this.descripcionRaza}}</p>
 </div>

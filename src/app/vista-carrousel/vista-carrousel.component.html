@@ -1,31 +1,36 @@
-<div>
-    <p>Bienvenido mira unos gateetos</p>
+<div style="font-family: arial;">
     <div style="position: relative;display: flex;justify-content: center;align-items: center;">
-        <button (click)="moverIzquierda()">left</button>
+        <button style="height: 220px; width: 25px; color:white;background-color: black;" (click)="moverIzquierda() " ><</button>
         @if(this.imagenInicial == -1) {
-            <div style="position:relative;height: 220px;width: 380px;background-color: gray;">
+            <div (click)="moverIzquierda()" style="cursor: pointer;position:relative;height: 220px;width: 380px;background-color: aliceblue;">
                 <div style="height:inherit;width: inherit; background-image: url({{this.breedArray[this.breedArray.length-1].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
             </div>
         }@else{
-            <div style="position:relative;height: 220px;width: 380px;background-color: gray;">
+            <div (click)="moverIzquierda()" style="cursor: pointer;position:relative;height: 220px;width: 380px;background-color: aliceblue;">
                 <div style="height:inherit;width: inherit; background-image: url({{this.breedArray[this.imagenInicial].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
             </div>
         }
-        <div style="position: relative;height: 220px;width: 380px;background-color: bisque;">
-            <div style="height:inherit;width: inherit;background-image: url({{this.breedArray[this.imagenInicial+1].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"
-                alt=""></div>
+        <div style="position: relative;height: 220px;width: 380px;background-color: aliceblue;">
+            <div style="height:inherit;width: inherit;background-image: url({{this.breedArray[this.imagenInicial+1].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt="">
+                <div style="height: inherit;width: inherit; background-image: linear-gradient(#000000FF,#00000000,#00000000);">
+                    <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.imagenInicial+1].name}}</p>
+                    <div style="display: flex; justify-content: space-around;">
+                        <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.imagenInicial+1].life_span +" Years"}}</p>
+                        <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.imagenInicial+1].origin}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
         @if(this.imagenInicial == this.breedArray.length-2) {
-            <div style="position: relative;height: 220px;width: 380px;background-color: aquamarine ;">
+            <div (click)="moverDerecha()" style="cursor: pointer;position: relative;height: 220px;width: 380px;background-color: aliceblue ;">
                 <div style="height:inherit;width: inherit;background-image: url({{this.breedArray[0].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
             </div>
         }@else{
-            <div style="position: relative;height: 220px;width: 380px;background-color: aquamarine ;">
+            <div (click)="moverDerecha()" style="cursor: pointer;position: relative;height: 220px;width: 380px;background-color: aliceblue ;">
                 <div style="height:inherit;width: inherit;background-image: url({{this.breedArray[this.imagenInicial+2].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
             </div>
         }
-        <button (click)="moverDerecha()">right</button>
+        <button style="height: 220px; width: 25px;color: white;background-color: black;" (click)="moverDerecha()">></button>
     </div>
-    <p>{{this.nombreRaza}}</p>
-    <p>{{this.descripcionRaza}}</p>
+    
 </div>

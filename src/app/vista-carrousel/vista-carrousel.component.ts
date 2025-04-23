@@ -1,5 +1,5 @@
 import { HttpClient} from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { breedInfo } from '../../models/breedInfo';
 import { RazasService } from '../services/razas.service';
 
@@ -13,8 +13,10 @@ import { RazasService } from '../services/razas.service';
 export class VistaCarrouselComponent {
   nombreRaza:string = "";
   descripcionRaza:string = "";
+  @Output() onElementSelected = new EventEmitter<breedInfo|null>();
   breedArray:Array<breedInfo> = [];
   imagenInicial:number = 0;
+  mostrandoDescripcion:boolean = false;
   constructor(private http: HttpClient,private razasService: RazasService) {
     // this.http.get('https://jsonplaceholder.typicode.com/posts').subscribe(data => {
     //   console.log(data);
@@ -25,24 +27,23 @@ export class VistaCarrouselComponent {
     this.cargarRazas()
   }
 
-  actualizarDescripcion() {
-    this.nombreRaza = this.breedArray[this.imagenInicial+1].name
-    this.descripcionRaza = this.breedArray[this.imagenInicial+1].description
-  }
 
   moverIzquierda() {
     this.imagenInicial = (this.imagenInicial == -1) ? this.breedArray.length-2:this.imagenInicial-1
-    this.actualizarDescripcion()
+    this.mostrandoDescripcion = false
+    this.onElementSelected.emit(this.breedArray[this.imagenInicial+1])
   }
 
   moverDerecha() {
     this.imagenInicial = this.imagenInicial = (this.imagenInicial == this.breedArray.length-2) ? -1:this.imagenInicial+1
-    this.actualizarDescripcion()
+    this.mostrandoDescripcion = false
+    this.onElementSelected.emit(this.breedArray[this.imagenInicial+1])
   }
 
   async cargarRazas() {
     this.breedArray = await this.razasService.getRazas()
-    this.actualizarDescripcion()
+    this.onElementSelected.emit(this.breedArray[this.imagenInicial+1])
+
   }
 }
 

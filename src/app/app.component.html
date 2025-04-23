@@ -1,11 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prueba Tecnica</title>
-</head>
-<body>
-  <app-vista-carrousel></app-vista-carrousel>
-</body>
-</html>
+
+  <app-barra-busqueda></app-barra-busqueda>
+  <app-vista-carrousel (onElementSelected)="this.razaSeleccionada = $event"></app-vista-carrousel>
+  @if(this.razaSeleccionada != null) {
+        <p style="text-align: center;">{{this.razaSeleccionada.description}}</p>
+        <p>comentarios:</p>
+        @if (this.razaSeleccionada.comentarios.length == 0) {
+          <p style="text-align: center; color:gray">Aun no hay comentarios, Se el primero!</p>
+        }@else{
+          @for (comentario of this.razaSeleccionada.comentarios; track $index) {
+            <p>{{comentario}}</p>
+          }
+        }
+        <form style="display: flex; justify-content: center;">
+          <div style="display: flex; justify-content: center;">
+            <textarea style="width: 500px; height: 50px;" id= "comentario" type="text" [formControl]="comentario"></textarea>
+          </div>
+          <button type="button" (click)="agregarComentario()" [disabled]="!comentario.valid">Comentar</button>
+        </form>
+        @if (comentario.hasError('required')) {
+          <p style="color: red; text-align: center;">El comentario no puede estar vacio</p>
+        }
+  }

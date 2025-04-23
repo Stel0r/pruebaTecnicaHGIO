@@ -15,6 +15,7 @@ export class VistaCarrouselComponent {
   @Output() onElementSelected = new EventEmitter<breedInfo|null>();
   @Input() busqueda:string = "";
   breedArray:Array<breedInfo> = [];
+  loaded:WritableSignal<boolean> = signal(false)
   imagenInicial:WritableSignal<number> = signal(0);
   mostrandoDescripcion:boolean = false;
   constructor(private http: HttpClient,private razasService: RazasService) {
@@ -27,9 +28,6 @@ export class VistaCarrouselComponent {
     this.cargarRazas()
   }
 
-  obtenerImagen(pos:number) {
-    
-  }
 
 
   moverIzquierda() {
@@ -46,15 +44,17 @@ export class VistaCarrouselComponent {
 
   async cargarRazas() {
     this.breedArray = await this.razasService.getRazas()
+    this.loaded.set(true)
     this.onElementSelected.emit(this.breedArray[this.imagenInicial() +1])
-
   }
 
   ngOnChanges(changes:SimpleChanges) {
-    if (changes['busqueda']) {
+    if (changes['busqueda'] && changes["busqueda"].currentValue != "") {
       this.breedArray.forEach((element: breedInfo,index:number) => { 
         if (element.name.toLowerCase() == this.busqueda.toLowerCase()) {
           this.imagenInicial.set(index - 1)
+          this.onElementSelected.emit(this.breedArray[this.imagenInicial() +1])
+          console.log(this.busqueda)
         }
       })
     }

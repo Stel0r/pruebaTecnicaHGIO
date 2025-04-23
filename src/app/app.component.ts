@@ -29,6 +29,7 @@ export class AppComponent {
 
   busquedaRealizada(busqueda: string) {
     this.busquedaActual = busqueda
+    setTimeout(()=>{this.busquedaActual = ""},100)
   }
 }
 

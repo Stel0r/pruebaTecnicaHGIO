@@ -6,7 +6,7 @@
         </form>
         <div style="z-index: 100;background-color: white;position: absolute; top: 30px;">
             @for (resultado of this.resultados; track $index) {
-                <p style=" height: 25px; width: 190px; cursor: pointer; margin-left: 10px;">{{resultado}}</p>
+                <p (click)="this.seleccionRaza(resultado)" style=" height: 25px; width: 190px; cursor: pointer; margin-left: 10px;">{{resultado}}</p>
             }
         </div>
     </div>

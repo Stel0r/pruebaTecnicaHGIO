@@ -1,5 +1,5 @@
 import { HttpClient} from '@angular/common/http';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { breedInfo } from '../../models/breedInfo';
 import { RazasService } from '../services/razas.service';
 
@@ -14,6 +14,7 @@ export class VistaCarrouselComponent {
   nombreRaza:string = "";
   descripcionRaza:string = "";
   @Output() onElementSelected = new EventEmitter<breedInfo|null>();
+  @Input() busqueda:string = "";
   breedArray:Array<breedInfo> = [];
   imagenInicial:number = 0;
   mostrandoDescripcion:boolean = false;
@@ -44,6 +45,16 @@ export class VistaCarrouselComponent {
     this.breedArray = await this.razasService.getRazas()
     this.onElementSelected.emit(this.breedArray[this.imagenInicial+1])
 
+  }
+
+  ngOnChanges(changes:SimpleChanges) {
+    if (changes['busqueda']) {
+      this.breedArray.forEach((element: breedInfo,index:number) => { 
+        if (element.name.toLowerCase() == this.busqueda.toLowerCase()) {
+          this.imagenInicial = index - 1
+        }
+      })
+    }
   }
 }
 

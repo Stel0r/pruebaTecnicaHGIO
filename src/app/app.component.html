@@ -1,6 +1,6 @@
 
-  <app-barra-busqueda></app-barra-busqueda>
-  <app-vista-carrousel (onElementSelected)="this.razaSeleccionada = $event"></app-vista-carrousel>
+  <app-barra-busqueda (realizarBusqueda)="busquedaRealizada($event)"></app-barra-busqueda>
+  <app-vista-carrousel (onElementSelected)="this.razaSeleccionada = $event" [busqueda]="busquedaActual"></app-vista-carrousel>
   @if(this.razaSeleccionada != null) {
         <p style="text-align: center;">{{this.razaSeleccionada.description}}</p>
         <p>comentarios:</p>

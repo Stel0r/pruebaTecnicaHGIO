@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { debounceTime, Subject } from 'rxjs';
 import { RazasService } from '../services/razas.service';
@@ -13,7 +13,7 @@ export class BarraBusquedaComponent {
   razas : Array<string> = [];
   resultados: Array<string> = [];
   ultimaBusqueda: Subject<string>;
-
+  @Output() realizarBusqueda : EventEmitter<string> = new EventEmitter<string>();
   constructor(private razaService: RazasService) {
     this.ultimaBusqueda = new Subject<string>();
 
@@ -25,6 +25,12 @@ export class BarraBusquedaComponent {
       this.buscarRaza(valor)
     })
   }
+
+  seleccionRaza(busqueda: string) {
+    this.realizarBusqueda.emit(busqueda);
+    this.resultados = []
+  }
+
   async buscarRaza(busqueda:string) {
     if(busqueda == ""){
       this.resultados = []

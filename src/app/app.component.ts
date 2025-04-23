@@ -16,6 +16,7 @@ export class AppComponent {
   title = 'pruebaTecnicaHGIO';
   razaSeleccionada: breedInfo|null = null
   comentario: FormControl = new FormControl('',[Validators.required])
+  busquedaActual: string = "";
 
   constructor(private razasService: RazasService) {
     this.razaSeleccionada = null
@@ -24,6 +25,10 @@ export class AppComponent {
   agregarComentario() {
     this.razasService.agregarComentario(this.razaSeleccionada!.id,this.comentario.value)
     this.comentario.setValue('')
+  }
+
+  busquedaRealizada(busqueda: string) {
+    this.busquedaActual = busqueda
   }
 }
 

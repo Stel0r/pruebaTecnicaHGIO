@@ -2,7 +2,7 @@
     <P style="font-weight: 600; color: WHITE; margin-left: 20px;">GATITOS</P>
     <div style="position: relative;">
         <form >
-            <input type="text" (input)="manejarCambio($event)" placeholder="Buscar raza" style="height: 30px; width: 200px; border-radius: 5px; border: none; margin-right: 20px;">
+            <input type="text" id="barraBusqueda" (input)="manejarCambio($event)" placeholder="Buscar raza" style="height: 30px; width: 200px; border-radius: 5px; border: none; margin-right: 20px;">
         </form>
         <div style="z-index: 100;background-color: white;position: absolute; top: 30px;">
             @for (resultado of this.resultados; track $index) {

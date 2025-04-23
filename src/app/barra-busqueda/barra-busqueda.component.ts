@@ -1,13 +1,15 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { debounceTime, Subject } from 'rxjs';
 import { RazasService } from '../services/razas.service';
 import { breedInfo } from '../../models/breedInfo';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-barra-busqueda',
   templateUrl: './barra-busqueda.component.html',
-  styleUrl: './barra-busqueda.component.css'
+  styleUrl: './barra-busqueda.component.css',
+  imports: [CommonModule,FormsModule]
 })
 export class BarraBusquedaComponent {
   razas : Array<string> = [];
@@ -28,7 +30,8 @@ export class BarraBusquedaComponent {
 
   seleccionRaza(busqueda: string) {
     this.realizarBusqueda.emit(busqueda);
-    this.resultados = []
+    this.resultados = [];
+    (document.getElementById("barraBusqueda")! as HTMLInputElement).value = ""
   }
 
   async buscarRaza(busqueda:string) {

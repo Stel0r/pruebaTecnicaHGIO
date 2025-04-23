@@ -3,11 +3,27 @@
         <button style="height: 220px; width: 25px; color:white;background-color: black;" (click)="moverIzquierda() " ><</button>
         @if(this.imagenInicial() == -1) {
             <div (click)="moverIzquierda()" style="cursor: pointer;position:relative;height: 220px;width: 380px;background-color: aliceblue;">
-                <div style="height:inherit;width: inherit; background-image: url({{this.breedArray[this.breedArray.length-1].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
+                <div style="height:inherit;width: inherit; background-image: url({{this.breedArray[this.breedArray.length-1].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt="">
+                    <div style="height: inherit;width: inherit; background-image:linear-gradient(#00000000,#00000000,#000000FF); align-content: end;">
+                        <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.breedArray.length-1].name}}</p>
+                        <div style="display: flex; justify-content: space-around;">
+                            <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.breedArray.length-1].life_span +" Years"}}</p>
+                            <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.breedArray.length-1].origin}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         }@else{
             <div (click)="moverIzquierda()" style="cursor: pointer;position:relative;height: 220px;width: 380px;background-color: aliceblue;">
-                <div [ngStyle]="{'background-image':'url('+this.breedArray[this.imagenInicial()].image.url+')'}" style="height:inherit;width: inherit;background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
+                <div [ngStyle]="{'background-image':'url('+this.breedArray[this.imagenInicial()].image.url+')'}" style="height:inherit;width: inherit;background-size: contain;background-repeat: no-repeat; background-position: center;"alt="">
+                    <div style="height: inherit;width: inherit; background-image: linear-gradient(#00000000,#00000000,#000000FF); align-content: end;">
+                        <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.imagenInicial()].name}}</p>
+                        <div style="display: flex; justify-content: space-around;">
+                            <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.imagenInicial()].life_span +" Years"}}</p>
+                            <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.imagenInicial()].origin}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         }
         <div style="position: relative;height: 220px;width: 380px;background-color: aliceblue;">
@@ -23,11 +39,27 @@
         </div>
         @if(this.imagenInicial() == this.breedArray.length-2) {
             <div (click)="moverDerecha()" style="cursor: pointer;position: relative;height: 220px;width: 380px;background-color: aliceblue ;">
-                <div style="height:inherit;width: inherit;background-image: url({{this.breedArray[0].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
+                <div style="height:inherit;width: inherit;background-image: url({{this.breedArray[0].image.url}});background-size: contain;background-repeat: no-repeat; background-position: center;"alt="">
+                    <div style="height: inherit;width: inherit; background-image: linear-gradient(#00000000,#00000000,#000000FF); align-content: end;">
+                        <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[0].name}}</p>
+                        <div style="display: flex; justify-content: space-around;">
+                            <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[0].life_span +" Years"}}</p>
+                            <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[0].origin}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         }@else{
             <div (click)="moverDerecha()" style="cursor: pointer;position: relative;height: 220px;width: 380px;background-color: aliceblue ;">
-                <div [ngStyle]="{'background-image':'url('+this.breedArray[this.imagenInicial()+2].image.url+')'}"  style="height:inherit;width: inherit;background-size: contain;background-repeat: no-repeat; background-position: center;"alt=""></div>
+                <div [ngStyle]="{'background-image':'url('+this.breedArray[this.imagenInicial()+2].image.url+')'}"  style="height:inherit;width: inherit;background-size: contain;background-repeat: no-repeat; background-position: center;"alt="">
+                    <div style="height: inherit;width: inherit; background-image: linear-gradient(#00000000,#00000000,#000000FF); align-content: end;">
+                        <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.imagenInicial()+2].name}}</p>
+                        <div style="display: flex; justify-content: space-around;">
+                            <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.imagenInicial()+2].life_span +" Years"}}</p>
+                            <p style="margin:0px;padding: 0px;color: white;text-align: center;">{{this.breedArray[this.imagenInicial()+2].origin}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         }
         <button style="height: 220px; width: 25px;color: white;background-color: black;" (click)="moverDerecha()">></button>

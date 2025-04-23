@@ -1,22 +1,21 @@
 import { HttpClient} from '@angular/common/http';
-import { Component, EventEmitter, Input, Output, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal, SimpleChanges, WritableSignal } from '@angular/core';
 import { breedInfo } from '../../models/breedInfo';
 import { RazasService } from '../services/razas.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-vista-carrousel',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './vista-carrousel.component.html',
   styleUrl: './vista-carrousel.component.css'
 })
 
 export class VistaCarrouselComponent {
-  nombreRaza:string = "";
-  descripcionRaza:string = "";
   @Output() onElementSelected = new EventEmitter<breedInfo|null>();
   @Input() busqueda:string = "";
   breedArray:Array<breedInfo> = [];
-  imagenInicial:number = 0;
+  imagenInicial:WritableSignal<number> = signal(0);
   mostrandoDescripcion:boolean = false;
   constructor(private http: HttpClient,private razasService: RazasService) {
     // this.http.get('https://jsonplaceholder.typicode.com/posts').subscribe(data => {
@@ -28,22 +27,26 @@ export class VistaCarrouselComponent {
     this.cargarRazas()
   }
 
+  obtenerImagen(pos:number) {
+    
+  }
+
 
   moverIzquierda() {
-    this.imagenInicial = (this.imagenInicial == -1) ? this.breedArray.length-2:this.imagenInicial-1
+    this.imagenInicial.set((this.imagenInicial() == -1) ? this.breedArray.length-2:this.imagenInicial() -1)
     this.mostrandoDescripcion = false
-    this.onElementSelected.emit(this.breedArray[this.imagenInicial+1])
+    this.onElementSelected.emit(this.breedArray[this.imagenInicial() +1])
   }
 
   moverDerecha() {
-    this.imagenInicial = this.imagenInicial = (this.imagenInicial == this.breedArray.length-2) ? -1:this.imagenInicial+1
+    this.imagenInicial.set((this.imagenInicial() == this.breedArray.length-2) ? -1:this.imagenInicial() +1)
     this.mostrandoDescripcion = false
-    this.onElementSelected.emit(this.breedArray[this.imagenInicial+1])
+    this.onElementSelected.emit(this.breedArray[this.imagenInicial( ) +1])
   }
 
   async cargarRazas() {
     this.breedArray = await this.razasService.getRazas()
-    this.onElementSelected.emit(this.breedArray[this.imagenInicial+1])
+    this.onElementSelected.emit(this.breedArray[this.imagenInicial() +1])
 
   }
 
@@ -51,7 +54,7 @@ export class VistaCarrouselComponent {
     if (changes['busqueda']) {
       this.breedArray.forEach((element: breedInfo,index:number) => { 
         if (element.name.toLowerCase() == this.busqueda.toLowerCase()) {
-          this.imagenInicial = index - 1
+          this.imagenInicial.set(index - 1)
         }
       })
     }

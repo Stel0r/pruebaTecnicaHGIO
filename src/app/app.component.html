@@ -1,14 +1,18 @@
 
   <app-barra-busqueda (realizarBusqueda)="busquedaRealizada($event)"></app-barra-busqueda>
   <app-vista-carrousel (onElementSelected)="this.razaSeleccionada = $event" [busqueda]="busquedaActual"></app-vista-carrousel>
+  <div style="margin-left: 5%; margin-right: 5%;">
   @if(this.razaSeleccionada != null) {
         <p style="text-align: center;">{{this.razaSeleccionada.description}}</p>
-        <p>comentarios:</p>
+        <p style="margin-left: 200px;">comentarios:</p>
         @if (this.razaSeleccionada.comentarios.length == 0) {
           <p style="text-align: center; color:gray">Aun no hay comentarios, Se el primero!</p>
         }@else{
           @for (comentario of this.razaSeleccionada.comentarios; track $index) {
-            <p>{{comentario}}</p>
+            <div style="display: flex;align-items: center; padding: 10px;margin-left: 200px; margin-right: 200px;margin-bottom: 10px; background-color: rgb(221, 221, 221);">
+              <div style="width: 50px; height: 50px; background-color: gray;"></div>
+              <p style="margin-left: 20px; width: 850px;">{{comentario}}</p>
+            </div>
           }
         }
         <form style="display: flex; justify-content: center;">
@@ -21,3 +25,4 @@
           <p style="color: red; text-align: center;">El comentario no puede estar vacio</p>
         }
   }
+  </div>
